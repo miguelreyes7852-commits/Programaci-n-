@@ -1,0 +1,63 @@
+# Sistema de gestión y simulación de instrumentos musicales orientados a objetos
+
+# Creación de la clase base
+class InstrumentoMusical:
+    def __init__(self, nombre, tipo):
+        self.nombre = nombre
+        self.tipo = tipo
+        # Aplicación de Encapsulamiento
+        # Se utiliza un atributo privado (__volumen) para proteger el estado interno del objeto
+        self.__volumen = "Medio"
+
+    def obtener_volumen(self):
+        return self.__volumen
+
+    def cambiar_volumen(self, nuevo_volumen):
+        self.__volumen = nuevo_volumen
+
+    def tocar(self):
+        return "El instrumento emite un sonido general."
+
+# Uso de super() y Herencia
+class Guitarra(InstrumentoMusical):
+    def __init__(self, nombre, tipo, numero_cuerdas):
+        # Heredamos los atributos de la clase base usando super()
+        super().__init__(nombre, tipo)
+        self.numero_cuerdas = numero_cuerdas
+
+    # Sobrescritura de métodos (Polimorfismo)
+    def tocar(self):
+        return f"La guitarra de {self.numero_cuerdas} cuerdas suena con un acorde brillante y distorsionado."
+
+class Piano(InstrumentoMusical):
+    def __init__(self, nombre, tipo, numero_teclas):
+        super().__init__(nombre, tipo)
+        self.numero_teclas = numero_teclas
+
+    # Sobrescritura de métodos (Polimorfismo)
+    def tocar(self):
+        return f"El piano de {self.numero_teclas} teclas interpreta una hermosa melodía clásica."
+
+# Instanciación y pruebas
+if __name__ == "__main__":
+    print("=== PRUEBAS DEL SISTEMA MUSICAL ===\n")
+
+    # Creación de instancias
+    mi_guitarra = Guitarra("Fender Stratocaster", "Cuerda", 6)
+    mi_piano = Piano("Yamaha Grand", "Cuerda Percutida", 88)
+
+    # Probando la Guitarra (Herencia, Encapsulamiento y Polimorfismo)
+    print(f"Instrumento: {mi_guitarra.nombre}")
+    print(f"Tipo: {mi_guitarra.tipo}")
+    print(f"Volumen inicial (Encapsulado): {mi_guitarra.obtener_volumen()}")
+    
+    mi_guitarra.cambiar_volumen("Alto")
+    print(f"Volumen ajustado: {mi_guitarra.obtener_volumen()}")
+    print(mi_guitarra.tocar()) # Método polimórfico
+    
+    print("-" * 40)
+
+    # Probando el Piano (Herencia y Polimorfismo)
+    print(f"Instrumento: {mi_piano.nombre}")
+    print(f"Tipo: {mi_piano.tipo}")
+    print(mi_piano.tocar()) # Método polimórfico
